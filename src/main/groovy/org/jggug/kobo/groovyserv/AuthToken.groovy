@@ -43,11 +43,7 @@ class AuthToken {
         } catch (IOException e) {
             throw new GServIOException("Could not write AuthToken file: ${WorkFiles.AUTHTOKEN_FILE}", e)
         }
-    }
-
-    void delete() {
-        WorkFiles.AUTHTOKEN_FILE.delete()
-        //LogUtils.verboseLog "Deleted authToken: ${token}"
+        WorkFiles.AUTHTOKEN_FILE.deleteOnExit()
     }
 
     boolean isValid(given) {

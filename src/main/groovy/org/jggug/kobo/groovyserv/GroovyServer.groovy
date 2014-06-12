@@ -60,13 +60,9 @@ class GroovyServer {
             LogUtils.errorLog "Unexpected error: GroovyServer", e
             exit ExitStatus.UNEXPECTED_ERROR
         }
-        finally {
-            authToken.delete()
-        }
     }
 
     void shutdown() {
-        authToken.delete()
         LogUtils.infoLog "Server is shut down"
         exit ExitStatus.FORCELY_SHUTDOWN
     }
