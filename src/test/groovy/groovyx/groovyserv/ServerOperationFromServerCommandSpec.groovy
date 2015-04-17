@@ -257,7 +257,7 @@ class ServerOperationFromServerCommandSpec extends Specification {
     private static String deleteAuthTokenFile() {
         assert WorkFiles.AUTHTOKEN_FILE.exists()
         def oldToken = WorkFiles.AUTHTOKEN_FILE.text
-        WorkFiles.AUTHTOKEN_FILE.delete()
+        assert WorkFiles.AUTHTOKEN_FILE.delete()
         return oldToken
     }
 

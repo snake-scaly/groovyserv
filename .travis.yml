@@ -2,31 +2,29 @@ language: go
 
 jdk:
   - oraclejdk8
-  - oraclejdk7
-  - openjdk7
-  - openjdk6
+#  - oraclejdk7
+#  - openjdk7
+#  - openjdk6
 
-# Use docker
 sudo: false
 
-# The latest Groovy should be installed because the Groovy version installed by default at travis is too old.
-# But GVM for Go is installed by default. So it needs some tricky way.
+# The latest Groovy must be installed because the Groovy version installed by default for `language: groovy` is too old.
 install:
-  - curl -s get.gvmtool.net > ~/install_gvm.sh
-  - chmod 775 ~/install_gvm.sh
-  - ~/install_gvm.sh
+  - curl -s get.gvmtool.net | bash
   - echo "gvm_auto_answer=true" > ~/.gvm/etc/config
   - source ~/.gvm/bin/gvm-init.sh
   - gvm install groovy
-  - export GROOVY_HOME=~/.gvm/groovy/`ls -1 ~/.gvm/groovy | sort -r | grep -v current | head -n 1`
 
 before_script:
   - $GROOVY_HOME/bin/groovy -version
-  - go version
 
 script:
-    - ./gradlew clean check distLocalBin || ( find build/test-results -name "*.xml" | xargs cat ; exit 1 )
+    - ./gradlew clean check distLocalBin
+
+after_failure:
+    - find build/test-results -name "*.xml" | xargs cat
 
 cache:
   directories:
-    - $HOME/.gradle/
+    - $HOME/.gradle
+      #- $HOME/.gvm/groovy
