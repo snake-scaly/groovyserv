@@ -2,7 +2,7 @@ GroovyServ
 ==========
 
 GroovyServ reduces startup time of the JVM for runnning Groovy significantly.
-It depends on your environments, but in most case, it’s 10 to 20 times faster than regular Groovy.
+It depends on your environments, but in most case, it's 10 to 20 times faster than regular Groovy.
 See the [documentation](http://kobo.github.com/groovyserv/) for more information.
 
 
