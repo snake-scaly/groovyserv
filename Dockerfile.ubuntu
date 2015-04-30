@@ -10,17 +10,16 @@ FROM ubuntu:12.04
 
 # APT
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl locales unzip
+    apt-get install -y --no-install-recommends curl locales unzip openjdk-7-jdk
+
+# Java
+ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 
 # Golang (latest)
 RUN apt-get install -y --no-install-recommends python-software-properties git && \
     add-apt-repository -y ppa:duh/golang && \
     apt-get update && \
     apt-get install -y --no-install-recommends golang
-
-# Java
-RUN apt-get -y install openjdk-7-jdk wget
-ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 
 # Locale
 RUN echo 'en_US.UTF-8' >> /etc/locale.gen && \
