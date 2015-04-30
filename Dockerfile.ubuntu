@@ -19,15 +19,12 @@ ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 # Golang (latest)
 # https://github.com/docker-library/golang/blob/1a422afd7db928a821e97906ed27ed606e2f072a/1.4/Dockerfile
 ENV GOLANG_VERSION 1.4.2
-RUN curl -sSL https://golang.org/dl/go$GOLANG_VERSION.src.tar.gz | tar -v -C /usr/src -xz && \
-    cd /usr/src/go/src && \
-    ./make.bash --no-clean 2>&1 && \
-    mkdir -p /go/src /go/bin && \
-    chmod -R 777 /go
+RUN curl -sSL https://golang.org/dl/go$GOLANG_VERSION.src.tar.gz | tar -v -C /usr/src -xz
+RUN cd /usr/src/go/src && ./make.bash --no-clean 2>&1
 ENV PATH /usr/src/go/bin:$PATH
+RUN mkdir -p /go/src /go/bin && chmod -R 777 /go
 ENV GOPATH /go
 ENV PATH /go/bin:$PATH
-COPY /go/go-wrapper /usr/local/bin/
 
 # Locale
 RUN echo 'en_US.UTF-8' >> /etc/locale.gen && \
