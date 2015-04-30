@@ -13,7 +13,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends golang curl locales
 
 # Locale
-RUN echo 'en_US UTF-8' >> /etc/locale.gen && \
+RUN echo 'en_US.UTF-8' >> /etc/locale.gen && \
     locale-gen
 ENV LANG en_US.UTF-8
 

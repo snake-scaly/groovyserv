@@ -1,3 +1,11 @@
+#
+# Dockerfile for testing
+#
+# Usage:
+#
+#  $ docker build -t kobo/groovyserv:ubuntu
+#  $ docker run -it --rm -v $PWD:/usr/src/app -v $HOME/.gradle:/root/.gradle -v $HOME/.m2:/root/.m2 kobo/groovyserv:ubuntu
+#
 FROM ubuntu:12.04
 
 # APT
@@ -15,7 +23,7 @@ RUN apt-get -y install openjdk-7-jdk wget
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 
 # Locale
-RUN echo 'en_US UTF-8' >> /etc/locale.gen && \
+RUN echo 'en_US.UTF-8' >> /etc/locale.gen && \
     locale-gen
 ENV LANG en_US.UTF-8
 
