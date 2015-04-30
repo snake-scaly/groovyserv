@@ -1,0 +1,32 @@
+FROM ubuntu:12.04
+
+# APT
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends curl locales unzip
+
+# Golang (latest)
+RUN apt-get install -y --no-install-recommends python-software-properties git && \
+    add-apt-repository -y ppa:duh/golang && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends golang
+
+# Java
+RUN apt-get -y install openjdk-7-jdk wget
+ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
+
+# Locale
+RUN echo 'en_US UTF-8' >> /etc/locale.gen && \
+    locale-gen
+ENV LANG en_US.UTF-8
+
+# GVM: Groovy
+RUN bash -lc "curl -s get.gvmtool.net | bash" && \
+    bash -lc "gvm install groovy"
+ENV PATH $PATH:/root/.gvm/groovy/current/bin
+
+# Copy all here. Or you can replace it with PWD at runtime:
+COPY . /usr/src/app
+WORKDIR /usr/src/app
+
+CMD ["./gradlew"]
+
